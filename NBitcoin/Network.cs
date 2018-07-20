@@ -1459,13 +1459,41 @@ namespace NBitcoin
 			}
 		}
 
+		private bool isBTCPForkEnabled(int nHeight)
+		{
+			return nHeight > 272991; // nForkStartHeight
+		}
+
+		// TODO - use
+		public Money GetRewardBTCP(int nHeight)
+		{
+			long nSubsidy = new Money(12.5 * Money.COIN);
+			int halvingInterval = consensus.SubsidyHalvingInterval;
+			if (isBTCPForkEnabled(nHeight)) {
+				halvingInterval >>= 2;
+			}
+			
+			int halvings = nHeight / halvingInterval;
+			if (isBTCPForkEnabled(nHeight))
+        		halvings += 2;
+
+			// Force block reward to zero when right shift is undefined.
+			if (halvings >= 64)
+				return Money.Zero;
+
+			// Subsidy is cut in half every 840,000 blocks which will occur approximately every 4 years.
+			nSubsidy >>= halvings;
+
+			return new Money(nSubsidy);
+		}
+
 		public Money GetReward(int nHeight)
 		{
 			long nSubsidy = new Money(50 * Money.COIN);
 			int halvings = nHeight / consensus.SubsidyHalvingInterval;
 
 			// Force block reward to zero when right shift is undefined.
-			if(halvings >= 64)
+			if (halvings >= 64)
 				return Money.Zero;
 
 			// Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
