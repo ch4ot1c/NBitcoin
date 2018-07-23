@@ -10,7 +10,6 @@ namespace NBitcoin.Altcoins
     {
 		public static BCash BCash { get; } = BCash.Instance;
 		public static BGold BGold { get; } = BGold.Instance;
-		
 		public static BPrivate BPrivate { get; } = BPrivate.Instance;
 		public static Dash Dash { get; } = Dash.Instance;
 		public static Dogecoin Dogecoin { get; } = Dogecoin.Instance;
@@ -20,9 +19,8 @@ namespace NBitcoin.Altcoins
 		public static Polis Polis { get; } = Polis.Instance;
 		public static Monacoin Monacoin { get; } = Monacoin.Instance;
 		public static Ufo Ufo { get; } = Ufo.Instance;
-		public static Bitcoin Bitcoin { get; } = Bitcoin.Instance;
-
 		public static Groestlcoin Groestlcoin { get; } = Groestlcoin.Instance;
+		public static Bitcoin Bitcoin { get; } = Bitcoin.Instance;
 
 		public static IEnumerable<INetworkSet> GetAll()
 		{

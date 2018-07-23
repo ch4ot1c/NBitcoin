@@ -1467,7 +1467,7 @@ namespace NBitcoin
 		// TODO - use
 		public Money GetRewardBTCP(int nHeight)
 		{
-			long nSubsidy = new Money(12.5 * Money.COIN);
+			long nSubsidy = new Money((int)(12.5 * Money.COIN));
 			int halvingInterval = consensus.SubsidyHalvingInterval;
 			if (isBTCPForkEnabled(nHeight)) {
 				halvingInterval >>= 2;

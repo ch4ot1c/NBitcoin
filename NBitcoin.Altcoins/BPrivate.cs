@@ -70,7 +70,7 @@ namespace NBitcoin.Altcoins
 			// Fields -
 			// nVersion, hashPrevBlock, hashMerkleRoot, hashReserved, nTime, nBits, nNonce, nSolution
 
-			uint256 nHashReserved = new uint256();
+			uint256 hashReserved = new uint256();
 
 			public uint256 HashReserved
 			{
@@ -84,6 +84,7 @@ namespace NBitcoin.Altcoins
 				}
 			}
 
+			/* TODO uint256 nNonce
 			uint256 nNonce = new uint256();
 
 			public uint256 Nonce
@@ -97,6 +98,7 @@ namespace NBitcoin.Altcoins
 					nNonce = value;
 				}
 			}
+			*/
 
 			// 0 == Block Header view where Solution isn't present
 			uint nSolutionSize = 0;
@@ -146,7 +148,7 @@ namespace NBitcoin.Altcoins
 				stream.ReadWrite(ref nVersion);
 				stream.ReadWrite(ref hashPrevBlock);
 				stream.ReadWrite(ref hashMerkleRoot);
-				stream.ReadWrite(ref hashReserved)
+				stream.ReadWrite(ref hashReserved);
 				stream.ReadWrite(ref nTime);
 				stream.ReadWrite(ref nBits);
 				stream.ReadWrite(ref nNonce);

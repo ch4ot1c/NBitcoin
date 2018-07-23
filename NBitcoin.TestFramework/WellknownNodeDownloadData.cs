@@ -296,10 +296,10 @@ namespace NBitcoin.Tests
 				Version = "1.0.12-1",
 				Windows = new NodeOSDownloadData()
 				{
-					DownloadLink = "https://github.com/BTCPrivate/BitcoinPrivate/releases/download/{0}/btcp-{0}-win.7z",
-					Archive = "btcp-{0}-win.7z",
-					Executable = "btcp-{0}-win/btcpd.exe",
-					Hash = "129574c76653f7f15c97085f2a90898433c08f6a8ebe4ca5def3a88d17327abc"
+					DownloadLink = "https://github.com/BTCPrivate/BitcoinPrivate/releases/download/{0}/btcp-{0}-win.zip",
+					Archive = "btcp-{0}-win.zip",
+					Executable = "btcp-{0}/bin/btcpd.exe",
+					Hash = "23cc30e2638c465421dea0eff52627d6a4deae120cc8d853f27dcc70c72e1407"
 				},
 				Linux = new NodeOSDownloadData()
 				{
