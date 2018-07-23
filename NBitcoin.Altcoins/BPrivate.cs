@@ -66,50 +66,39 @@ namespace NBitcoin.Altcoins
 		}
 		public class BitcoinPrivateBlockHeader : BlockHeader
 		{
-			const int SERIALIZE_BLOCK_LEGACY = 0x04000000;
 
-			uint nHeight = 0;
+			// Fields -
+			// nVersion, hashPrevBlock, hashMerkleRoot, hashReserved, nTime, nBits, nNonce, nSolution
 
-			public uint Height
+			uint256 nHashReserved = new uint256();
+
+			public uint256 HashReserved
 			{
 				get
 				{
-					return nHeight;
+					return hashReserved;
 				}
 				set
 				{
-					nHeight = value;
+					hashReserved = value;
 				}
 			}
 
-			uint[] vReserved = new uint[7];
+			uint256 nNonce = new uint256();
 
-			public uint[] Reserved
+			public uint256 Nonce
 			{
 				get
 				{
-					return vReserved;
+					return nNonce;
 				}
 				set
 				{
-					vReserved = value;
+					nNonce = value;
 				}
 			}
 
-			uint256 nNewNonce = new uint256();
-
-			public uint256 NewNonce
-			{
-				get
-				{
-					return nNewNonce;
-				}
-				set
-				{
-					nNewNonce = value;
-				}
-			}
-
+			// 0 == Block Header view where Solution isn't present
 			uint nSolutionSize = 0;
 
 			public uint SolutionSize
@@ -138,42 +127,38 @@ namespace NBitcoin.Altcoins
 				}
 			}
 
+			// TODO - others in header
+
+			public override uint256 GetPoWHash()
+			{
+				//TODO - Equihash
+				/*
+				var headerBytes = this.ToBytes();
+				var h = NBitcoin.Crypto.SCrypt.ComputeDerivedKey(headerBytes, headerBytes, 1024, 1, 1, null, 32);
+				return new uint256(h);
+				*/
+				throw new NotSupportedException();
+			}
+
 			public override void ReadWrite(BitcoinStream stream)
 			{
 				var isNewFormat = !stream.Serializing || (nSolutionSize != 0);
 				stream.ReadWrite(ref nVersion);
 				stream.ReadWrite(ref hashPrevBlock);
 				stream.ReadWrite(ref hashMerkleRoot);
-				if (isNewFormat)
-				{
-					stream.ReadWrite(ref nHeight);
-					for (int i = 0; i < vReserved.Length; i++)
-					{
-						uint nReserved = 0;
-						stream.ReadWrite(ref nReserved);
-						vReserved[i] = nReserved;
-					}
-				}
+				stream.ReadWrite(ref hashReserved)
 				stream.ReadWrite(ref nTime);
 				stream.ReadWrite(ref nBits);
-				if (isNewFormat)
+				stream.ReadWrite(ref nNonce);
+				if (nSolutionSize > 0)
 				{
-					stream.ReadWrite(ref nNewNonce);
 					stream.ReadWriteAsVarInt(ref nSolutionSize);
-					if (nSolutionSize > 0)
+
+					if (!stream.Serializing)
 					{
-						if(!stream.Serializing)
-						{
-							nSolution = new byte[nSolutionSize];
-						}
-						stream.ReadWrite(ref nSolution);
+						nSolution = new byte[nSolutionSize];
 					}
-				}
-				else
-				{
-					nNonce = nNewNonce.GetLow32();
-					stream.ReadWrite(ref nNonce);
-					nNewNonce = new uint256(nNonce);
+					stream.ReadWrite(ref nSolution);
 				}
 			}
 		}
