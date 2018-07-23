@@ -289,6 +289,35 @@ namespace NBitcoin.Tests
 			};
 		}
 
+		public class BPrivateNodeDownloadData
+		{
+			public NodeDownloadData v1_0_12 = new NodeDownloadData()
+			{
+				Version = "1.0.12-1",
+				Windows = new NodeOSDownloadData()
+				{
+					DownloadLink = "https://github.com/BTCPrivate/BitcoinPrivate/releases/download/{0}/btcp-{0}-win.7z",
+					Archive = "btcp-{0}-win.7z",
+					Executable = "btcp-{0}-win/btcpd.exe",
+					Hash = "129574c76653f7f15c97085f2a90898433c08f6a8ebe4ca5def3a88d17327abc"
+				},
+				Linux = new NodeOSDownloadData()
+				{
+					DownloadLink = "https://github.com/BTCPrivate/BitcoinPrivate/releases/download/{0}/btcp-{0}-linux.zip",
+					Archive = "btcp-{0}-linux.zip",
+					Executable = "btcp-{0}-linux/btcpd",
+					Hash = "f0c5b06899216475429abb5d77a83587748d1b86daf3d0c8f0f6857cb571c116"
+				},
+				Mac = new NodeOSDownloadData()
+				{
+					DownloadLink = "https://github.com/BTCPrivate/BitcoinPrivate/releases/download/{0}/btcp-{0}-mac.zip",
+					Archive = "btcp-{0}-mac.zip",
+					Executable = "btcp-{0}-mac/btcpd",
+					Hash = "1da5a8a8f76f123c692c185c6e53be38cd07d880ecb65d8ce497cab901b931ac"
+				},
+			};
+		}
+
 		public class PolisNodeDownloadData
 		{
 			public NodeDownloadData v1_3_0 = new NodeDownloadData()
@@ -452,6 +481,11 @@ namespace NBitcoin.Tests
 		{
 			get; set;
 		} = new BGoldNodeDownloadData();
+
+		public static BPrivateNodeDownloadData BPrivate
+		{
+			get; set;
+		} = new BPrivateNodeDownloadData();
 
 		public static PolisNodeDownloadData Polis
 		{
