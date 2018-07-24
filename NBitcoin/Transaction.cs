@@ -731,7 +731,7 @@ namespace NBitcoin
 			return key.Sign(hash, sigHash);
 		}
 
-		public uint256 GetSignatureHash(ICoin coin, SigHash sigHash = SigHash.All)
+		public uint256 GetSignatureHash(ICoin coin, SigHash sigHash = SigHash.All | SigHash.VerifyForkId)
 		{
 			return Transaction.GetSignatureHash(coin.GetScriptCode(), (int)Index, sigHash, coin.TxOut.Value, coin.GetHashVersion());
 		}
@@ -1400,15 +1400,15 @@ namespace NBitcoin
 			}
 			return h;
 		}
-		public uint256 GetSignatureHash(ICoin coin, SigHash sigHash = SigHash.All)
+		public uint256 GetSignatureHash(ICoin coin, SigHash sigHash = SigHash.All | SigHash.VerifyForkId)
 		{
 			return Inputs.AsIndexedInputs().ToArray()[GetIndex(coin)].GetSignatureHash(coin, sigHash);
 		}
-		public TransactionSignature SignInput(ISecret secret, ICoin coin, SigHash sigHash = SigHash.All)
+		public TransactionSignature SignInput(ISecret secret, ICoin coin, SigHash sigHash = SigHash.All | SigHash.VerifyForkId)
 		{
 			return SignInput(secret.PrivateKey, coin, sigHash);
 		}
-		public TransactionSignature SignInput(Key key, ICoin coin, SigHash sigHash = SigHash.All)
+		public TransactionSignature SignInput(Key key, ICoin coin, SigHash sigHash = SigHash.All | SigHash.VerifyForkId)
 		{
 			return Inputs.AsIndexedInputs().ToArray()[GetIndex(coin)].Sign(key, coin, sigHash);
 		}
@@ -1902,7 +1902,7 @@ namespace NBitcoin
 			}
 		}
 
-		private static readonly uint MAX_BLOCK_SIZE = 1000000;
+		private static readonly uint MAX_BLOCK_SIZE = 2000000;
 		private static readonly ulong MAX_MONEY = 21000000ul * Money.COIN;
 
 		/// <summary>

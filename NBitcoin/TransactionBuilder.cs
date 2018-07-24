@@ -1079,7 +1079,7 @@ namespace NBitcoin
 		/// <exception cref="NBitcoin.NotEnoughFundsException">Not enough funds are available</exception>
 		public Transaction BuildTransaction(bool sign)
 		{
-			var tx = BuildTransaction(sign, SigHash.All);
+			var tx = BuildTransaction(sign, SigHash.All | SigHash.VerifyForkId);
 			_built = true;
 			return tx;
 		}
@@ -1132,7 +1132,7 @@ namespace NBitcoin
 
 			if(sign)
 			{
-				SignTransactionInPlace(ctx.Transaction, sigHash);
+				SignTransactionInPlace(ctx.Transaction, sigHash); //sighash 65
 			}
 			return ctx.Transaction;
 		}
@@ -1242,24 +1242,24 @@ namespace NBitcoin
 		public Transaction SignTransaction(Transaction transaction, SigHash sigHash)
 		{
 			var tx = transaction.Clone();
-			SignTransactionInPlace(tx, sigHash);
+			SignTransactionInPlace(tx, sigHash | SigHash.VerifyForkId);
 			return tx;
 		}
 
 		public Transaction SignTransaction(Transaction transaction)
 		{
-			return SignTransaction(transaction, SigHash.All);
+			return SignTransaction(transaction, SigHash.All | SigHash.VerifyForkId);
 		}
 		public Transaction SignTransactionInPlace(Transaction transaction)
 		{
-			return SignTransactionInPlace(transaction, SigHash.All);
+			return SignTransactionInPlace(transaction, SigHash.All | SigHash.VerifyForkId);
 		}
 		public Transaction SignTransactionInPlace(Transaction transaction, SigHash sigHash)
 		{
 			TransactionSigningContext ctx = new TransactionSigningContext(this, transaction);
 			if(transaction is IHasForkId hasForkId)
 			{
-				sigHash = (SigHash)((uint)sigHash | 0x40u);
+				sigHash |= (SigHash)((uint)sigHash | 0x41u);
 			}
 			ctx.SigHash = sigHash;
 			foreach(var input in transaction.Inputs.AsIndexedInputs())

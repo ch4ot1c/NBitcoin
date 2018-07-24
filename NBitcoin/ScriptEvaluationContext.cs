@@ -1679,13 +1679,13 @@ namespace NBitcoin
 			}
 
 			var temp = ~(SigHash.AnyoneCanPay);
-			if((ScriptVerify & ScriptVerify.ForkId) != 0)
+			if((ScriptVerify & ScriptVerify.BTCPForkId) != 0)
 			{
-				temp = (SigHash)((uint)temp & ~(0x40u));
+				temp = (SigHash)((uint)temp & ~(0x41u));
 			}
 			byte nHashType = (byte)(vchSig[vchSig.Length - 1] & (byte)temp);
-			if(nHashType < (byte)SigHash.All || nHashType > (byte)SigHash.Single)
-				return false;
+			//if(nHashType < (byte)SigHash.All || nHashType > (byte)SigHash.Single)
+				//return false;
 
 			return true;
 		}

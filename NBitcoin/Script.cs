@@ -125,7 +125,7 @@ namespace NBitcoin
 		// TODO - use
 		// https://github.com/BTCPrivate/BitcoinPrivate/blob/4031ff02ec7c56bcafa085b01100cbddfcd33ea3/src/script/interpreter.h#L130
 		// https://github.com/BTCGPU/BTCGPU/commit/777899b682c3d59702a4223c8239705a74616a63#diff-b81dfdd8a5bd80fe9f82b5a40c4c991eR126
-		BTCPForkId = (1U << 16), // (standard flag for BPrivate)
+		BTCPForkId = (1U << 17), // (standard flag for BPrivate)
 
 		/// <summary>
 		/// Mandatory script verification flags that all new blocks must comply with for
@@ -182,6 +182,11 @@ namespace NBitcoin
 		/// If set, no inputs, except this, are part of the signature
 		/// </summary>
 		AnyoneCanPay = 0x80,
+
+		/// <summary>
+		/// Bitcoin Private - SIGHASH_ALL | SIGHASH_FORKID (0x40)
+		/// </summary>
+		VerifyForkId = 0x40,
 	};
 
 	/// <summary>

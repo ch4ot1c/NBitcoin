@@ -44,8 +44,10 @@ namespace NBitcoin.Altcoins
 		public override uint256 GetSignatureHash(Script scriptCode, int nIn, SigHash nHashType, Money amount, HashVersion sigversion, PrecomputedTransactionData precomputedTransactionData)
 		{
 			uint nForkHashType = (uint)nHashType;
-			if(UsesForkId(nHashType))
-				nForkHashType |= ForkId << 8;
+			//0x41 works as nHashType
+			//if(UsesForkId(nHashType)) {
+				nForkHashType |= (42 << 8);
+			//}
 
 			if((SupportSegwit && sigversion == HashVersion.Witness) || UsesForkId(nHashType))
 			{

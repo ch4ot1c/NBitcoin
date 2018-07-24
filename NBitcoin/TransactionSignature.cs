@@ -21,7 +21,7 @@ namespace NBitcoin
 		/// <param name="sig">Signature in bytes</param>
 		/// <param name="scriptVerify">Verification rules</param>
 		/// <returns>True if valid</returns>
-		public static bool IsValid(byte[] sig, ScriptVerify scriptVerify = ScriptVerify.DerSig | ScriptVerify.StrictEnc)
+		public static bool IsValid(byte[] sig, ScriptVerify scriptVerify = ScriptVerify.DerSig | ScriptVerify.StrictEnc | ScriptVerify.BTCPForkId)
 		{
 			ScriptError error;
 			return IsValid(sig, scriptVerify, out error);
@@ -64,7 +64,7 @@ namespace NBitcoin
 			_Signature = signature;
 		}
 		public TransactionSignature(ECDSASignature signature)
-			: this(signature, SigHash.All)
+			: this(signature, SigHash.All | SigHash.VerifyForkId)
 		{
 
 		}
