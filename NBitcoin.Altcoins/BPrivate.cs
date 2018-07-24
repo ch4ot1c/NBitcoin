@@ -42,10 +42,10 @@ namespace NBitcoin.Altcoins
 			{
 				return new BitcoinPrivateBlock(new BitcoinPrivateBlockHeader());
 			}
-
+			
 			public override Transaction CreateTransaction()
 			{
-				// BTCP is a fork of Zclassic, FORKID = 42
+				// BTCP is a fork of Zclassic,  = 42
 				// No Segwit (For now)
 				return new ForkIdTransaction(42, false, this);
 			}

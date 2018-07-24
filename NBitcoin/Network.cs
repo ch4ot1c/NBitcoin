@@ -1459,12 +1459,15 @@ namespace NBitcoin
 			}
 		}
 
+		/*
 		private bool isBTCPForkEnabled(int nHeight)
 		{
 			return nHeight > 272991; // nForkStartHeight
 		}
+		*/
 
 		// TODO - use
+		/*
 		public Money GetRewardBTCP(int nHeight)
 		{
 			long nSubsidy = new Money((int)(12.5 * Money.COIN));
@@ -1486,6 +1489,7 @@ namespace NBitcoin
 
 			return new Money(nSubsidy);
 		}
+		*/
 
 		public Money GetReward(int nHeight)
 		{

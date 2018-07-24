@@ -45,7 +45,7 @@ namespace NBitcoin.Altcoins
 		{
 			uint nForkHashType = (uint)nHashType;
 			if(UsesForkId(nHashType))
-				nForkHashType |= ForkId << 8;
+				nForkHashType |= (42 << 8);
 
 			if((SupportSegwit && sigversion == HashVersion.Witness) || UsesForkId(nHashType))
 			{

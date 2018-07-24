@@ -121,11 +121,11 @@ namespace NBitcoin
 		/// <summary>
 		/// Some altcoins like BCash and BGold requires ForkId inside the sigHash
 		/// </summary>
-		ForkId = (1U << 29),
-		// TODO - use
+		//ForkId = (1U << 29),
+		// TODO - BTCP SCRIPT_VERIFY_FORKID - temp, but use
 		// https://github.com/BTCPrivate/BitcoinPrivate/blob/4031ff02ec7c56bcafa085b01100cbddfcd33ea3/src/script/interpreter.h#L130
 		// https://github.com/BTCGPU/BTCGPU/commit/777899b682c3d59702a4223c8239705a74616a63#diff-b81dfdd8a5bd80fe9f82b5a40c4c991eR126
-		BTCPForkId = (1U << 16), // (standard flag for BPrivate)
+		ForkId = (1U << 17), // (standard flag for BPrivate)
 
 		/// <summary>
 		/// Mandatory script verification flags that all new blocks must comply with for

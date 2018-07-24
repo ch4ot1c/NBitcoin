@@ -1638,6 +1638,12 @@ namespace NBitcoin
 				Error = ScriptError.SigHashType;
 				return false;
 			}
+			/*
+			else if ((flags & SCRIPT_VERIFY_FORKID) != 0 && !UsesForkId(vchSig)) {
+        	return set_error(serror, SCRIPT_ERR_SIG_HASHTYPE);
+    		}
+			*/
+			//TODO verify forkid
 			return true;
 		}
 
