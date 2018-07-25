@@ -1679,9 +1679,10 @@ namespace NBitcoin
 			}
 
 			var temp = ~(SigHash.AnyoneCanPay);
+			// Technically wrong, should be always applied and rejected if no forkid
 			if((ScriptVerify & ScriptVerify.BTCPForkId) != 0)
 			{
-				temp = (SigHash)((uint)temp & ~(0x41u));
+				temp = (SigHash)((uint)temp & ~(0xc0u));
 			}
 			byte nHashType = (byte)(vchSig[vchSig.Length - 1] & (byte)temp);
 			//if(nHashType < (byte)SigHash.All || nHashType > (byte)SigHash.Single)

@@ -1431,7 +1431,7 @@ namespace NBitcoin
 			}
 		}
 
-		public static uint CURRENT_VERSION = 2;
+		public static uint CURRENT_VERSION = 1;
 		public static uint MAX_STANDARD_TX_SIZE = 100000;
 
 		public TxOut AddOutput(Money money, IDestination destination)

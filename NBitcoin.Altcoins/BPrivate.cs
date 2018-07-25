@@ -142,6 +142,7 @@ namespace NBitcoin.Altcoins
 				throw new NotSupportedException();
 			}
 
+			/*
 			public override void ReadWrite(BitcoinStream stream)
 			{
 				var isNewFormat = !stream.Serializing || (nSolutionSize != 0);
@@ -162,7 +163,7 @@ namespace NBitcoin.Altcoins
 					}
 					stream.ReadWrite(ref nSolution);
 				}
-			}
+			}*/
 		}
 #pragma warning restore CS0618 // Type or member is obsolete
 
